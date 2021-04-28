@@ -7,16 +7,30 @@ const initialState = createApiData();
 
 export const getMovieList = createAsyncThunk(
   'FETCH_MOVIE_DETAIL',
-  ({ email, password }) => movieService
-    .getMovieDetail({ email, password })
-  // .catch(_.flowRight(rejectWithValue, extractErrorMessageFromError)),
+  ({ keyword, page }, { rejectWithValue }) => movieService
+    .getMovieDetail({ keyword, page })
+    .then(data => {
+      const responseBool = _.chain(data)
+        .get('Response')
+        .toLower()
+        .value();
+
+      if(responseBool === 'false') {
+        return rejectWithValue(_.get(data, 'Error'))
+      }
+
+      return data
+    })
+    .catch(rejectWithValue)
 );
 
 const movieDetailSlice = createSlice({
   name: 'MOVIE_DETAIL',
   initialState,
   reducers: {
-    reset: (state, action) =>  {},
+    reset: (state, action) =>  {
+      return initialState
+    },
   },
   extraReducers: withAPIDataReducers({
     asyncThunk: getMovieList,

@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { getMovieList } from 'store/slices/listing';
+import {getMovieList, resetMovieList} from 'store/slices/listing';
 import PropTypes from 'prop-types';
+
+import _ from 'utils/lodash-wrapper';
 
 const ListingSearchBarComponent = props => {
   const dispatch = useDispatch();
@@ -15,9 +17,13 @@ const ListingSearchBarComponent = props => {
 
   const handleSearch = () => {
     dispatch(getMovieList({
-      keyword: inputValue,
+      keyword: _.toLower(inputValue),
       page: 1
     }))
+  }
+
+  const handleReset = () => {
+    dispatch(resetMovieList())
   }
 
   const renderAutoCompleteOption = () => {
@@ -42,9 +48,15 @@ const ListingSearchBarComponent = props => {
           {renderAutoCompleteOption()}
         </datalist>
       </div>
-      <button className="search-btn" onClick={handleSearch}>
-        Search
-      </button>
+      <div>
+        <button className="search-btn" onClick={handleSearch}>
+          Search
+        </button>
+        <button className="search-btn" onClick={handleReset}>
+          Reset
+        </button>
+      </div>
+
     </div>
   );
 };

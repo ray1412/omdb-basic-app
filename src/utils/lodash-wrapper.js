@@ -5,6 +5,8 @@ import reduce from 'lodash/reduce';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
 import isEmpty from 'lodash/isEmpty';
+import toLower from 'lodash/toLower';
+import chain from 'lodash/chain';
 
 import value from 'lodash/value';
 import mixin from 'lodash/mixin';
@@ -18,6 +20,8 @@ const _ = mixin(wrapperLodash, {
   get,
   omit,
   isEmpty,
+  toLower,
+  chain
 });
 
 // Executes the chain sequence to resolve the unwrapped value

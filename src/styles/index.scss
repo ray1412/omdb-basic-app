@@ -5,3 +5,44 @@
 .App {
   text-align: center;
 }
+
+.loader-wrapper {
+  @keyframes spin {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+  }
+
+  .spinner {
+    border: 5px solid #f3f3f3;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    border-top: 5px solid #555;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin: 0 auto;
+  }
+}
+
+.message-container {
+  background: #efefef;
+  color: #000;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 10px 20px;
+  width: fit-content;
+  margin: 5px auto;
+  box-sizing: border-box;
+}
+
+.message-container[data-status='error'] {
+  background: #f6a2a2;
+  color: #680101;
+  border: 1px solid transparent;
+}
+
+.message-container[data-status='success'] {
+  background: #aef1a8;
+  color: #066a02;
+  border: 1px solid transparent;
+}
