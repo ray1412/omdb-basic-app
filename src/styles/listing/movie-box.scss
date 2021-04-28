@@ -1,0 +1,23 @@
+.movie-box-container {
+  width: fit-content;
+  padding: 10px 5px 5px;
+  border: 1px solid transparent;
+  margin: 10px;
+  background: $medium_gray;
+  display: inline-block;
+
+  img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+  }
+
+  div {
+    line-height: 1.45rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}

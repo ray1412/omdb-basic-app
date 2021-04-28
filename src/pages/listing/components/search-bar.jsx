@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import {getMovieList, resetMovieList} from 'store/slices/listing';
-import PropTypes from 'prop-types';
 
 import _ from 'utils/lodash-wrapper';
 
-const ListingSearchBarComponent = props => {
+const ListingSearchBarComponent = () => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('')
 
@@ -15,8 +14,10 @@ const ListingSearchBarComponent = props => {
     setInputValue(value);
   }
 
-  const handleSearch = () => {
-    dispatch(getMovieList({
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    return dispatch(getMovieList({
       keyword: _.toLower(inputValue),
       page: 1
     }))
@@ -41,7 +42,7 @@ const ListingSearchBarComponent = props => {
   }
 
   return (
-    <div className="listing-search-bar-container">
+    <form onSubmit={handleSearch} className="listing-search-bar-container">
       <div className="search-box">
         <input type="text" list="keyword" value={inputValue} onChange={handleInputValueOnChange}/>
         <datalist id="keyword">
@@ -56,13 +57,8 @@ const ListingSearchBarComponent = props => {
           Reset
         </button>
       </div>
-
-    </div>
+    </form>
   );
-};
-
-ListingSearchBarComponent.propTypes = {
-
 };
 
 export default ListingSearchBarComponent;
