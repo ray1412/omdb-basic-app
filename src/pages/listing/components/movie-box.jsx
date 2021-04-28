@@ -18,7 +18,17 @@ const MovieBox = props => {
 };
 
 MovieBox.propTypes = {
+  data: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Year: PropTypes.string.isRequired,
+    imdbID: PropTypes.string.isRequired,
+    Type: PropTypes.string.isRequired,
+    Poster: PropTypes.string.isRequired,
+  }),
+};
 
+MovieBox.defaultProps = {
+  data: {}
 };
 
 export default MovieBox;
