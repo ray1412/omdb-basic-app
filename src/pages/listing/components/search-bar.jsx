@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import {getMovieList, resetMovieList} from 'store/slices/listing';
+import {
+  getMovieList,
+  setKeyword,
+  resetMovieList
+} from 'store/slices/listing';
 
 import _ from 'utils/lodash-wrapper';
 
@@ -16,14 +20,17 @@ const ListingSearchBarComponent = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
+    dispatch(resetMovieList());
+    dispatch(setKeyword(_.toLower(inputValue)))
     return dispatch(getMovieList({
       keyword: _.toLower(inputValue),
       page: 1
     }))
   }
 
-  const handleReset = () => {
+  const handleReset = (e) => {
+    e.preventDefault();
+    setInputValue('');
     dispatch(resetMovieList())
   }
 

@@ -1,26 +1,37 @@
-import React, { useEffect, lazy} from 'react'
+import React, { useEffect, useRef, lazy} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import _ from 'utils/lodash-wrapper';
 import {
   resetMovieList,
-  selectMovieListReduxState
+  selectMovieListReduxState,
+  getMovieList
 } from 'store/slices/listing';
+import useIntersectionObserver from 'utils/hooks/use-intersection-observer';
 import SearchBarComponent from 'pages/listing/components/search-bar';
 import Loader from 'components/common/loader';
 
 const MovieBoxComponent = lazy(() => import('pages/listing/components/movie-box'));
 const MessageComponent = lazy(()=> import('components/common/message'))
 
-const ListingPage = props => {
+const ListingPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const bottomRef = useRef(null);
+  const isBottomVisible = useIntersectionObserver({
+    ref: bottomRef,
+    options: {
+      threshold: 0 //trigger event as soon as the element is in the viewport.
+    },
+  forward: false // don't remove the observer after intersected.
+  });
 
   const {
     data: movieListData,
     totalData: movieListTotalData,
+    page: currentPage,
+    keyword,
     isFetching: isFetchingMovieList,
     errorMessage: movieListErrorMessage
   } = useSelector(selectMovieListReduxState)
@@ -31,7 +42,7 @@ const ListingPage = props => {
     }
 
     return movieListData.map(item => {
-      return <MovieBoxComponent data={item} key={item.Title}/>
+      return <MovieBoxComponent data={item} key={_.uniqueId()}/>
     });
   };
 
@@ -41,26 +52,62 @@ const ListingPage = props => {
 
   useEffect(() => () => {
     dispatch(resetMovieList())
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if(
+      isBottomVisible
+      && !isFetchingMovieList
+      && _.isEmpty(movieListErrorMessage)
+    ) {
+      // TODO add interval so spam will not works
+      dispatch(getMovieList({
+        keyword,
+        page: currentPage
+      }))
+    }
+  }, [
+    dispatch,
+    isBottomVisible,
+    isFetchingMovieList,
+    movieListErrorMessage,
+    keyword,
+    currentPage
+  ])
+
+  const isNeedToShowErrorMessage = (
+    !_.isEmpty(movieListErrorMessage)
+    && movieListData.length === 0
+  );
+
+  const isNeedToShowBottomRef = (
+    // requirement from the task ~
+    movieListData.length > 5
+    && _.isEmpty(movieListErrorMessage)
+  )
 
   return (
     <div className="listing-page-container">
       <SearchBarComponent />
       <div className="listing-box">
         {
-          !_.isEmpty(movieListErrorMessage)
+          isNeedToShowErrorMessage
           && <MessageComponent status='error' message={movieListErrorMessage} />
         }
-        <Loader isLoading={isFetchingMovieList}>
-          {renderCollectionOfMovieBox()}
-        </Loader>
+        {renderCollectionOfMovieBox()}
+        <Loader isLoading={isFetchingMovieList} />
       </div>
+      <div
+        className="bottom-page-wrapper"
+        ref={bottomRef}
+        style={{
+          width: "100%",
+          height: "20px",
+          display: isNeedToShowBottomRef? 'block': 'none'
+        }}
+      />
     </div>
   );
-};
-
-ListingPage.propTypes = {
-
 };
 
 export default ListingPage;
