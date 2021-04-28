@@ -1,4 +1,4 @@
-import _ from 'src/utils/lodash-wrapper';
+import _ from 'utils/lodash-wrapper';
 import BadGatewayError from 'utils/errors/bad-gateway-error';
 import ServiceUnavailableError from 'utils/errors/service-unavailable-error';
 import ResourceNotFound from 'utils/errors/resource-not-found-error';

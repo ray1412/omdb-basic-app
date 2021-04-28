@@ -1,0 +1,22 @@
+.listing-search-bar-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+
+  .search-box {
+    width: 70%;
+    max-width: 300px;
+    min-width: 200px;
+    margin-right: 20px;
+    box-sizing: border-box;
+
+    input {
+      width: 100%
+    }
+  }
+
+  .search-btn {
+
+  }
+}

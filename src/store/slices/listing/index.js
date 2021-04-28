@@ -7,8 +7,8 @@ const initialState = createApiData();
 
 export const getMovieList = createAsyncThunk(
   'FETCH_MOVIE_LIST',
-  ({ email, password }) => movieService
-    .getMovieList({ email, password })
+  ({ keyword, page }) => movieService
+    .getMovieList({ keyword, page })
     // .catch(_.flowRight(rejectWithValue, extractErrorMessageFromError)),
 );
 

@@ -2,6 +2,8 @@ import React from 'react'
 import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
 
+import SearchBarComponent from 'pages/listing/components/search-bar';
+
 const ListingPage = props => {
   const history = useHistory();
 
@@ -10,8 +12,8 @@ const ListingPage = props => {
   }
 
   return (
-    <div>
-      <h2> listing page </h2>
+    <div className="listing-page-container">
+      <SearchBarComponent />
       <button type="button" onClick={handleClick}>
         Go to Detail
       </button>
