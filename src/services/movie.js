@@ -1,5 +1,4 @@
 import { extractData, getApiCaller } from 'utils/api';
-import _ from 'utils/lodash-wrapper';
 import apiConfig from 'configs/api';
 
 const getMovieList = ({ keyword, page}) => getApiCaller()
@@ -7,13 +6,21 @@ const getMovieList = ({ keyword, page}) => getApiCaller()
     data: {
       params: {
         s: keyword,
-          page
+        page
       }
     }
   })
   .then(extractData)
 
-const getMovieDetail = () => {}
+const getMovieDetail = ({ id }) => getApiCaller()
+  .get(apiConfig.movie.detail, {
+    data: {
+      params: {
+        i: id,
+      }
+    }
+  })
+  .then(extractData)
 
 const movieService = {
   getMovieList,

@@ -26,7 +26,7 @@ const ControlledPopup = ({
 }
 
 const MovieBox = props => {
-  const { data } = props;
+  const { data, onClick } = props;
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const isContainPoster = _.toUpper(data.Poster) !== 'N/A';
 
@@ -58,8 +58,10 @@ const MovieBox = props => {
             onClick={() => togglePopup()}
           />
       }
-      <div className="title">{data.Title}</div>
-      <div className="desc">{data.Year}</div>
+      <div onClick={() => onClick(data.imdbID)}>
+        <div className="title">{data.Title}</div>
+        <div className="desc">{data.Year}</div>
+      </div>
     </div>
   );
 };

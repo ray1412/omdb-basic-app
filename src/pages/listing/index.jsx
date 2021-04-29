@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import _ from 'utils/lodash-wrapper';
 import {MOVIE_LISTING_THRESHOLD_TO_TRIGGER_INFINITE_SCROLL} from 'constants/pagination'
 import {
-  resetMovieList,
+  // resetMovieList,
   selectMovieListReduxState,
   getMovieList
 } from 'store/slices/listing';
@@ -30,7 +30,7 @@ const ListingPage = () => {
 
   const {
     data: movieListData,
-    totalData: movieListTotalData,
+    // totalData: movieListTotalData,
     page: currentPage,
     keyword,
     isFetching: isFetchingMovieList,
@@ -43,16 +43,20 @@ const ListingPage = () => {
     }
 
     return movieListData.map(item => {
-      return <MovieBoxComponent data={item} key={_.uniqueId()}/>
+      return <MovieBoxComponent
+        data={item}
+        key={_.uniqueId()}
+        onClick={handleClick}
+      />
     });
   };
 
-  const handleClick = () => {
-    history.push("/detail/123");
+  const handleClick = (movieId) => {
+    history.push(`/detail/${movieId}`);
   }
 
   useEffect(() => () => {
-    dispatch(resetMovieList())
+    // dispatch(resetMovieList());
   }, [dispatch]);
 
   useEffect(() => {
@@ -85,7 +89,7 @@ const ListingPage = () => {
     // requirement from the task ~
     movieListData.length > MOVIE_LISTING_THRESHOLD_TO_TRIGGER_INFINITE_SCROLL
     && _.isEmpty(movieListErrorMessage)
-  )
+  );
 
   return (
     <div className="listing-page-container">
