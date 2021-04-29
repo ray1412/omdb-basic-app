@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import 'reactjs-popup/dist/index.css';
 import 'styles/index.scss';
 
 const ListingPage = lazy(() => import('pages/listing'));

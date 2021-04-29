@@ -1,2 +1,25 @@
 $white: #FEFEFE;
 $medium_gray: #ECECEC;
+$medium_dark_gray: #9c9c9c;
+
+//
+//  Media Queries Breakpoints
+//  ---------------------------------------------
+
+//  Extra large screen / wide desktop
+$screen-xl-min: 1200px;
+
+//  Large screen / desktop
+$screen-lg-max: ($screen-xl-min - 1);
+$screen-lg-min: 992px;
+
+//  Medium screen / tablet
+$screen-md-max: ($screen-lg-min - 1);
+$screen-md-min: 768px;
+
+//  Small screen / landscape phone
+$screen-sm-max: ($screen-md-min - 1);
+$screen-sm-min: 576px;
+
+//  Extra small screen / portrait phone
+$screen-xs-max: ($screen-sm-min - 1);

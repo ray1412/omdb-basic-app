@@ -6,6 +6,7 @@ import get from 'lodash/get';
 import omit from 'lodash/omit';
 import isEmpty from 'lodash/isEmpty';
 import toLower from 'lodash/toLower';
+import toUpper from 'lodash/toUpper';
 import set from 'lodash/set';
 import uniqueId from 'lodash/uniqueId'
 import chain from 'lodash/chain';
@@ -22,6 +23,7 @@ const _ = mixin(wrapperLodash, {
   get,
   omit,
   isEmpty,
+  toUpper,
   toLower,
   set,
   uniqueId,
