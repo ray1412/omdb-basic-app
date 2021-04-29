@@ -47,7 +47,7 @@ const DetailPage = () => {
       return (
         <div className="tuple">
           <span className="key">{item}</span>
-          <span className="value">{_.get(movieDetailData, item, '')}</span>
+          <span className="value">{_.get(movieDetailData, item, '').toString()}</span>
         </div>
       )
     });
