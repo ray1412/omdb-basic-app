@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import _ from 'utils/lodash-wrapper';
+import {MOVIE_LISTING_THRESHOLD_TO_TRIGGER_INFINITE_SCROLL} from 'constants/pagination'
 import {
   resetMovieList,
   selectMovieListReduxState,
@@ -82,7 +83,7 @@ const ListingPage = () => {
 
   const isNeedToShowBottomRef = (
     // requirement from the task ~
-    movieListData.length > 5
+    movieListData.length > MOVIE_LISTING_THRESHOLD_TO_TRIGGER_INFINITE_SCROLL
     && _.isEmpty(movieListErrorMessage)
   )
 
