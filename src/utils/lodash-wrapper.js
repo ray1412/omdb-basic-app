@@ -10,7 +10,7 @@ import toUpper from 'lodash/toUpper';
 import set from 'lodash/set';
 import uniqueId from 'lodash/uniqueId'
 import chain from 'lodash/chain';
-import isNil from 'lodash/isNil'
+import isNil from 'lodash/isNil';
 
 import value from 'lodash/value';
 import mixin from 'lodash/mixin';
@@ -29,7 +29,7 @@ const _ = mixin(wrapperLodash, {
   set,
   uniqueId,
   isNil,
-  chain
+  chain,
 });
 
 // Executes the chain sequence to resolve the unwrapped value

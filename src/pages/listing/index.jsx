@@ -23,7 +23,7 @@ const ListingPage = () => {
   const isBottomVisible = useIntersectionObserver({
     ref: bottomRef,
     options: {
-      threshold: 0 //trigger event as soon as the element is in the viewport.
+      threshold: 1.0 //trigger event as soon as the element is in the viewport.
     },
   forward: false // don't remove the observer after intersected.
   });
@@ -54,10 +54,6 @@ const ListingPage = () => {
   const handleClick = (movieId) => {
     history.push(`/detail/${movieId}`);
   }
-
-  useEffect(() => () => {
-    // dispatch(resetMovieList());
-  }, [dispatch]);
 
   useEffect(() => {
     if (
@@ -107,7 +103,7 @@ const ListingPage = () => {
         ref={bottomRef}
         style={{
           width: "100%",
-          height: "20px",
+          height: "40px",
           display: isNeedToShowBottomRef? 'block': 'none'
         }}
       />
