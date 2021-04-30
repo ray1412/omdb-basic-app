@@ -50,12 +50,14 @@
         place-content: center;
         font-size: 1.1rem;
         width: 90%;
+        min-width: 300px;
         max-width: 500px;
         max-height: 500px;
         height: 50vh;
         min-height: 300px;
         background: $medium_dark_gray;
         margin: 0 auto 10px;
+        box-sizing: border-box;
       }
 
     }
