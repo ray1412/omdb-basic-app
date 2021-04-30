@@ -3,9 +3,13 @@
 
 .listing-page-container {
   background: $white;
-  margin: 2%;
+  margin: 5% 2%;
 
   .listing-box {
     margin: 10px 0;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    margin: 2%;
   }
 }

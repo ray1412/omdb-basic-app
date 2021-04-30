@@ -12,7 +12,13 @@
     box-sizing: border-box;
 
     input {
-      width: 100%
+      width: 100%;
+      border-radius: 10px;
+      border-width: 1px;
+      height: 28px;
+      box-sizing: border-box;
+      padding: 2px 5px;
+      outline: none;
     }
 
     @media (min-width: $screen-sm-min) {
@@ -21,6 +27,13 @@
   }
 
   button {
+    border: transparent;
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius: 10px;
+    box-sizing: border-box;
+    height: 28px;
+
     &:nth-child(odd) {
       margin-right: 5px
     }

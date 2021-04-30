@@ -51,7 +51,13 @@ const ListingSearchBarComponent = () => {
   return (
     <form onSubmit={handleSearch} className="listing-search-bar-container">
       <div className="search-box">
-        <input type="text" list="keyword" value={inputValue} onChange={handleInputValueOnChange}/>
+        <input
+          type="text"
+          list="keyword"
+          value={inputValue}
+          onChange={handleInputValueOnChange}
+          placeholder="Search any movie!"
+        />
         <datalist id="keyword">
           {renderAutoCompleteOption()}
         </datalist>
