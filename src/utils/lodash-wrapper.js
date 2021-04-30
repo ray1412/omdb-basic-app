@@ -11,6 +11,10 @@ import set from 'lodash/set';
 import uniqueId from 'lodash/uniqueId'
 import chain from 'lodash/chain';
 import isNil from 'lodash/isNil';
+import debounce from 'lodash/debounce';
+import slice from 'lodash/slice';
+import map from 'lodash/map';
+import includes from 'lodash/includes';
 
 import value from 'lodash/value';
 import mixin from 'lodash/mixin';
@@ -29,6 +33,10 @@ const _ = mixin(wrapperLodash, {
   set,
   uniqueId,
   isNil,
+  debounce,
+  slice,
+  map,
+  includes,
   chain,
 });
 

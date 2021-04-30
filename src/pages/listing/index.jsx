@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import _ from 'utils/lodash-wrapper';
 import {MOVIE_LISTING_THRESHOLD_TO_TRIGGER_INFINITE_SCROLL} from 'constants/pagination'
 import {
-  // resetMovieList,
   selectMovieListReduxState,
   getMovieList
 } from 'store/slices/listing';
@@ -23,7 +22,7 @@ const ListingPage = () => {
   const isBottomVisible = useIntersectionObserver({
     ref: bottomRef,
     options: {
-      threshold: 1.0 //trigger event as soon as the element is in the viewport.
+      threshold: 1.0 // trigger event as soon as the element is in the viewport.
     },
   forward: false // don't remove the observer after intersected.
   });

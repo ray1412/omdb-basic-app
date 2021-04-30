@@ -3,6 +3,7 @@
 ## Features
 - Listing movie by user's keyword and also integrated with infinite scroll to enrich the user experience.
 - Displaying the details of a selected movie.
+- Autocomplete search box
 
 ## Tech Stack
 - This project was bootstrapped with [Create React App]

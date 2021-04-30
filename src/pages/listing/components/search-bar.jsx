@@ -1,27 +1,35 @@
-import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
+import React, {useEffect, useState, useCallback} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   getMovieList,
   setKeyword,
   resetMovieList
 } from 'store/slices/listing';
+import {
+  getAutocompleteMovieList,
+  resetAutoComplete,
+  selectAutoCompleteReduxState
+} from 'store/slices/auto-complete'
 
 import _ from 'utils/lodash-wrapper';
 
 const ListingSearchBarComponent = () => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('')
+  const { data: autoCompleteData } = useSelector(selectAutoCompleteReduxState)
 
   const handleInputValueOnChange = (e) => {
     const { target } = e;
     const { value } = target;
-    setInputValue(value);
+
+    return setInputValue(value);
   }
 
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(resetMovieList());
     dispatch(setKeyword(_.toLower(inputValue)))
+
     return dispatch(getMovieList({
       keyword: _.toLower(inputValue),
       page: 1
@@ -30,22 +38,39 @@ const ListingSearchBarComponent = () => {
 
   const handleReset = (e) => {
     e.preventDefault();
-    setInputValue('');
+    dispatch(resetAutoComplete());
     dispatch(resetMovieList())
+
+    return setInputValue('');
   }
 
-  const renderAutoCompleteOption = () => {
-    // TODO implement autocomplete
+  const debouncedQuery = useCallback(
+    _.debounce((val) => {
+      dispatch(getAutocompleteMovieList({
+        keyword: val,
+        page: 1
+      }))
+    }, 500), []);
 
-    return (
-      <>
-      {/*<option value="Internet Explorer" />*/}
-      {/*<option value="Firefox" />*/}
-      {/*<option value="Chrome" />*/}
-      {/*<option value="Opera" />*/}
-      {/*<option value="Safari" />*/}
-      </>
-    )
+  useEffect(() => {
+    if (
+      !_.isEmpty(inputValue)
+      && !_.includes(autoCompleteData, inputValue)
+    ) {
+      debouncedQuery(_.toLower(inputValue));
+    }
+  }, [inputValue]);
+
+  const renderAutoCompleteOption = () => {
+    if (_.isNil(autoCompleteData)) {
+      return null;
+    }
+
+    return autoCompleteData.map((item, idx) => {
+      return (
+        <option value={item} key={`${item}-${idx}`} />
+      )
+    })
   }
 
   return (
