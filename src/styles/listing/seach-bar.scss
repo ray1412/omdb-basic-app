@@ -8,15 +8,25 @@
     width: 70%;
     max-width: 300px;
     min-width: 200px;
-    margin-right: 20px;
+    margin: 0 0 10px;
     box-sizing: border-box;
 
     input {
       width: 100%
     }
+
+    @media (min-width: $screen-sm-min) {
+      margin: 0 20px 0 0;
+    }
   }
 
-  .search-btn {
+  button {
+    &:nth-child(odd) {
+      margin-right: 5px
+    }
 
+    &:nth-child(even) {
+      margin-left: 5px
+    }
   }
 }

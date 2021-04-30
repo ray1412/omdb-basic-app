@@ -60,7 +60,7 @@ const ListingSearchBarComponent = () => {
         <button className="search-btn" onClick={handleSearch}>
           Search
         </button>
-        <button className="search-btn" onClick={handleReset}>
+        <button className="reset-btn" onClick={handleReset}>
           Reset
         </button>
       </div>
