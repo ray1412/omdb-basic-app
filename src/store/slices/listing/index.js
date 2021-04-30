@@ -19,7 +19,7 @@ export const getMovieList = createAsyncThunk(
         .toLower()
         .value();
 
-      if(responseBool === 'false') {
+      if (responseBool === 'false') {
         return rejectWithValue(_.get(data, 'Error'))
       }
 

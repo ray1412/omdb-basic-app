@@ -28,10 +28,35 @@ const DetailPage = () => {
     return () => {
       dispatch(resetMovieDetail());
     }
-  },[]);
+  },[dispatch]);
+
+  const renderMoviePoster = () => {
+    const posterUrl = _.toUpper(_.get(movieDetailData, 'Poster', ''));
+
+    if (_.isNil(posterUrl)) {
+      return null
+    }
+
+    if (posterUrl === 'N/A') {
+      return (
+        <div className="no-img">
+          No Poster Available :(
+        </div>
+      );
+    }
+
+    return (
+      <img
+        loading="lazy"
+        decoding="async"
+        src={_.get(movieDetailData, 'Poster', '')}
+        alt={_.get(movieDetailData, 'Title', '')}
+      />
+    )
+  }
 
   const renderMovieDescription = () => {
-    if(_.isNil(movieDetailData)) {
+    if (_.isNil(movieDetailData)) {
       return null;
     }
 
@@ -67,15 +92,15 @@ const DetailPage = () => {
   return (
     <div className="detail-page-container">
       <Loader isLoading={isLoading} />
-      { !isLoading && <button onClick={handleBackToPrevPage}> go back </button>}
+      {
+        !isLoading &&
+        <div className="button-wrapper">
+          <button onClick={handleBackToPrevPage} value="">&lt;&lt;</button>
+        </div>
+      }
       <div className="movie-container">
         <div className="image-wrapper">
-          <img
-            loading="lazy"
-            decoding="async"
-            src={_.get(movieDetailData, 'Poster', '')}
-            alt={_.get(movieDetailData, 'Title', '')}
-          />
+          {renderMoviePoster()}
         </div>
         <div className="description-box">
           {renderMovieDescription()}

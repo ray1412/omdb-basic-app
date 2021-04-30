@@ -1,11 +1,11 @@
 .movie-box-container {
-  width: 100%;
+  background: $medium_gray;
+  width: calc(100% - 20px);
   max-width: 325px;
   height: 375px;
   padding: 10px 5px 5px;
   border: 1px solid transparent;
   margin: 10px;
-  background: $medium_gray;
   display: inline-block;
   box-sizing: border-box;
 
@@ -27,7 +27,7 @@
     margin: 0 auto 10px;
   }
 
-  > div {
+  > div:not(.no-img) {
     cursor: pointer;
   }
 

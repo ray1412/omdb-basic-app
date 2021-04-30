@@ -38,7 +38,7 @@ const ListingPage = () => {
   } = useSelector(selectMovieListReduxState)
 
   const renderCollectionOfMovieBox = () => {
-    if(movieListData.length === 0) {
+    if (movieListData.length === 0) {
       return null
     }
 
@@ -60,7 +60,7 @@ const ListingPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(
+    if (
       isBottomVisible
       && !isFetchingMovieList
       && _.isEmpty(movieListErrorMessage)
