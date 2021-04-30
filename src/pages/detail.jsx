@@ -28,7 +28,7 @@ const DetailPage = () => {
     return () => {
       dispatch(resetMovieDetail());
     }
-  },[dispatch]);
+  },[dispatch, id]);
 
   const renderMoviePoster = () => {
     const posterUrl = _.toUpper(_.get(movieDetailData, 'Poster', ''));
@@ -86,8 +86,6 @@ const DetailPage = () => {
     movieDetailIsFetching
     || _.isNil(movieDetailData)
   )
-
-  console.log('movieDetailData ==> ', movieDetailData);
 
   return (
     <div className="detail-page-container">
