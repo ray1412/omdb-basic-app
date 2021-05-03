@@ -6,13 +6,19 @@ import store from 'store'
 import App from 'pages/main';
 import reportWebVitals from 'reportWebVitals';
 
-ReactDOM.render(
+export const rootApp = (
   <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
+);
+
+export const rootElement = document.getElementById('root')
+
+ReactDOM.render(
+  rootApp,
+  rootElement,
 );
 
 // If you want to start measuring performance in your app, pass a function
